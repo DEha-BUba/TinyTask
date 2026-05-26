@@ -1,42 +1,124 @@
-# TinyTask (WinAPI) Mini Clone
+# TinyTask Pro
 
-Bu proje, saf WinAPI ile basit bir TinyTask benzeri kayit/oynat uygulamasidir.
+Gelişmiş Windows makro kaydedici ve oynatıcı.
 
-## Ozellikler
+TinyTask Pro; klavye ve fare olaylarını kaydedebilen, bunları tekrar oynatabilen, hız kontrolü, loop sistemi, kayıt dosyası desteği ve global hotkey özellikleri bulunan hafif bir otomasyon aracıdır.
 
-- Temel pencere ve Win32 mesaj dongusu
-- Kayit Baslat/Durdur dugmesi
-- Oynat dugmesi
-- Duraklat/Devam Et ve Durdur dugmeleri
-- Global klavye ve fare olaylarini `SetWindowsHookEx` ile kaydetme
-- `SendInput` ile kaydedilen olaylari oynatma
-- Olaylar arasi gecikme kaydi ve playback sirasinda gecikmeye uyma
-- Loop secenegi (checkbox)
-- Kaydedilen olaylari ListBox'ta gosterme
-- Hiz ayari (%25 - %400) icin Trackbar (slider)
-- Durum etiketi (Bekliyor/Kayit/Oynatiyor/Duraklatildi)
-- GUI donmamasi icin playback thread kullanimi
-- Global hotkey'ler:
-	- F8: Kayit Baslat/Durdur
-	- F9: Oynat
-	- F10: Duraklat/Devam Et
-	- F11: Oynatma Durdur
+---
 
-## Derleme (MinGW g++)
+## Özellikler
 
-PowerShell icinde proje klasorunde:
+- Klavye kayıt sistemi
+- Fare hareketi kayıt sistemi
+- Fare tıklama kayıt sistemi
+- Mouse wheel desteği
+- Gerçek zamanlı olay listesi
+- Hız ayarı (%25 - %400)
+- Loop modu
+- Tekrar sayısı belirleme
+- Duraklat / devam ettir sistemi
+- Olay silme sistemi
+- `.ttk` kayıt formatı
+- Kaydet / yükle desteği
+- Global hotkey sistemi
+- Multi-monitor desteği
+- DPI aware pencere sistemi
+- Thread tabanlı oynatma sistemi
 
-g++ -std=c++17 -Wall -Wextra -municode -mwindows .\main.cpp -o .\TinyTask.exe -lcomctl32
+---
 
-## Calistirma
+## Kısayollar
 
-PowerShell:
+| Tuş | İşlev |
+|---|---|
+| F8 | Kaydı başlat / durdur |
+| F9 | Oynat |
+| F10 | Duraklat / devam et |
+| F11 | Durdur |
 
-.\TinyTask.exe
+---
 
-## Notlar
+## Derleme
 
-- Dusuk seviyeli hook kullandigi icin uygulama aktifken global klavye/fare olaylarini kaydeder.
-- Kaydi durdurduktan sonra olay listesi ListBox'a doldurulur.
-- Playback sirasinda Loop seciliyse olaylar tekrar eder.
-- F8/F9/F10/F11 tuslari kayda dahil edilmez, kontrol tusu olarak ayrilir.
+### MinGW g++
+
+```bash
+g++ -std=c++17 -mwindows -o tinytask_pro.exe tinytask_pro.cpp -lcomctl32 -lcomdlg32
+```
+
+---
+
+## Kullanılan Teknolojiler
+
+- C++17
+- WinAPI
+- Windows Hooks
+- SendInput API
+- Common Controls API
+- Multi-threading (`std::thread`)
+- Atomic operations
+- Binary file serialization
+
+---
+
+## Desteklenen Olaylar
+
+### Klavye
+- Key down
+- Key up
+- Extended keys
+- Scan code desteği
+
+### Fare
+- Mouse move
+- Left click
+- Right click
+- Middle click
+- X buttons
+- Mouse wheel
+
+---
+
+## Dosya Formatı
+
+TinyTask Pro özel `.ttk` formatı kullanır.
+
+Dosya içinde:
+- olay tipi
+- gecikme süresi
+- sanal tuş kodu
+- scan code
+- koordinatlar
+- mouse flag bilgileri
+
+ikili (binary) biçimde saklanır.
+
+---
+
+## Arayüz
+
+Program aşağıdaki sistemleri içerir:
+
+- Olay listesi
+- Hız kontrol kaydırıcısı
+- Durum göstergesi
+- Tekrar sayısı sistemi
+- Loop checkbox
+- Kayıt yönetim düğmeleri
+
+---
+
+## Güvenlik Notu
+
+Bu proje:
+- düşük seviyeli klavye hookları
+- düşük seviyeli fare hookları
+- giriş simülasyonu
+
+kullandığı için bazı antivirüs yazılımları tarafından yanlış pozitif olarak algılanabilir.
+
+---
+
+## Geliştirici
+
+GitHub: DEha-BUba
